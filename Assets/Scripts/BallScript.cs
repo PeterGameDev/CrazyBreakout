@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class BallScript : MonoBehaviour
@@ -10,6 +11,7 @@ public class BallScript : MonoBehaviour
     private Vector3 direction;
     public bool onPaddle = true;
     public GameObject paddle;
+    public float bottomBoundary = -33f;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +20,8 @@ public class BallScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {        // launch the ball on player input
+    {        
+        // launch the ball on player input
         if (Input.GetButtonDown("Jump"))
         {
             Launch();
@@ -28,15 +31,17 @@ public class BallScript : MonoBehaviour
         if (onPaddle)
         {
             Vector3 newPosition = transform.position;
-            newPosition.x += Input.GetAxis("Horizontal") * paddle.GetComponent<PaddleScript>().moveSpeed * Time.deltaTime;
-            transform.position = newPosition;
+            Vector3 offset = Vector3.up;
+            //newPosition.x += Input.GetAxis("Horizontal") * paddle.GetComponent<PaddleScript>().moveSpeed * Time.deltaTime;
+            transform.position = paddle.transform.position + offset;
             return;
         }
-
 
         // move straight by default
         Vector3 movement = direction * currentSpeed * Time.deltaTime;
         transform.position += movement;
+
+        CheckBoundary();
     }
 
     public void Launch()
@@ -51,25 +56,36 @@ public class BallScript : MonoBehaviour
     {
         Vector3 normal = collision.GetContact(0).normal;
         direction -= 2 * Vector3.Dot(direction, normal) * normal;
-        //if (collision.gameObject.CompareTag("Wall"))
-        //{
-        //    hit wall, bounce back, calculate with vector reflection calculation
-        //   direction -= 2 * Vector3.Dot(direction, Vector3.left) * Vector3.left;
-
-        //}
-        //if (collision.gameObject.CompareTag("Ceiling"))
-        //{
-        //    direction -= 2 * Vector3.Dot(direction, Vector3.down) * Vector3.down;
-        //}
-        //if (collision.gameObject.CompareTag("Paddle"))
-        //{
-        //    direction -= 2 * Vector3.Dot(direction, Vector3.up) * Vector3.up;
-        //}
-        //if (collision.gameObject.CompareTag("Brick"))
-        //{
-        //    Vector3 normal = collision.GetContact(0).normal;
-        //    direction -= 2 * Vector3.Dot(direction, normal) * normal;
-        //}
+        if (collision.gameObject.CompareTag("Brick"))
+        {
+            StartCoroutine(HitBrick(collision.gameObject));
         }
+    }
+
+    IEnumerator HitBrick(GameObject brick)
+    {
+        int oldCount = FindObjectsOfType<BrickScript>().Length;
+        Destroy(brick);
+
+
+        // wait a bit for destroy to finish before check for win
+        // can change to wait for seconds for better performance
+
+        // yield return new WaitforSeconds(0.5);
+        yield return new WaitUntil( () => oldCount != FindObjectsOfType<BrickScript>().Length);
+        Debug.Log("Remaining bricks: "+FindObjectsOfType<BrickScript>().Length);
+        GameManager.Instance.CheckWin();
+    }
+
+
+    private void CheckBoundary()
+    {
+        if(transform.position.y < bottomBoundary)
+        {
+            Destroy(gameObject);
+            GameManager.Instance.GameOver();
+        }
+    }
+
 
 }
