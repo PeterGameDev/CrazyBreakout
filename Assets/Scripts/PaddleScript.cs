@@ -14,7 +14,6 @@ public class PaddleScript : MonoBehaviour
     void Update()
     {
         HandleMovement();
-        Debug.Log("Angle: " + transform.localEulerAngles.z);
         float angle = transform.localEulerAngles.z;
         if (Input.GetMouseButton(0) && (angle < maxAngle || angle > 360 - maxAngle - 5))
         {
@@ -27,6 +26,7 @@ public class PaddleScript : MonoBehaviour
             // rotate paddle to right
             transform.Rotate(0, 0, -rotateSpeed * Time.deltaTime);
         }
+
     }
 
     void HandleMovement()

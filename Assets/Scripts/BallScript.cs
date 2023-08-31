@@ -9,7 +9,6 @@ public class BallScript : MonoBehaviour
     private float initialSpeed = 10f;
     private float currentSpeed = 0f;
     private Vector3 direction;
-    public bool onPaddle = true;
     public GameObject paddle;
     public float bottomBoundary = -33f;
     // Start is called before the first frame update
@@ -28,7 +27,7 @@ public class BallScript : MonoBehaviour
         }
 
         // the ball stays with the paddle if it's on the paddle
-        if (onPaddle)
+        if (!GameManager.Instance.ballLaunched)
         {
             Vector3 newPosition = transform.position;
             Vector3 offset = Vector3.up;
@@ -46,10 +45,13 @@ public class BallScript : MonoBehaviour
 
     public void Launch()
     {
-        Debug.Log("Launch!");
-        currentSpeed = initialSpeed;
-        direction = transform.up;
-        onPaddle = false;
+        if (!GameManager.Instance.ballLaunched)
+        {
+            Debug.Log("Launch!");
+            currentSpeed = initialSpeed;
+            direction = transform.up;
+            GameManager.Instance.ballLaunched = true;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
