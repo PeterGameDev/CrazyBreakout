@@ -7,6 +7,7 @@ public class Level1Manager : MonoBehaviour
     public static Level1Manager Instance;
     public bool ballLaunched;
     public GameObject gameOverMenu;
+    public GameObject gameWonMenu;
     void Start()
     {
         if (Instance != null)
@@ -24,6 +25,7 @@ public class Level1Manager : MonoBehaviour
         Debug.Log("Game Over!");
         // Show gameover menu
         gameOverMenu.SetActive(true);
+        // Stop game afterward.
     }
 
     public void CheckWin()
@@ -38,5 +40,7 @@ public class Level1Manager : MonoBehaviour
     public void GameWon()
     {
         Debug.Log("Game Won!");
+        gameWonMenu.SetActive(true);
+        // Stop game afterward.
     }
 }
