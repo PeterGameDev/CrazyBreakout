@@ -2,25 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class Level1Manager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static Level1Manager Instance;
     public bool ballLaunched;
-
-    void Awake()
+    public GameObject gameOverMenu;
+    void Start()
     {
-
         if (Instance != null)
         {
             Destroy(gameObject);
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-
-    void Start()
-    {
         ballLaunched = false;
     }
 
@@ -29,7 +23,7 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Game Over!");
         // Show gameover menu
-        FindObjectOfType<GameOverMenuScript>().gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        gameOverMenu.SetActive(true);
     }
 
     public void CheckWin()

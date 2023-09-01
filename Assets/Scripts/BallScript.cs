@@ -27,7 +27,7 @@ public class BallScript : MonoBehaviour
         }
 
         // the ball stays with the paddle if it's on the paddle
-        if (!GameManager.Instance.ballLaunched)
+        if (!Level1Manager.Instance.ballLaunched)
         {
             Vector3 newPosition = transform.position;
             Vector3 offset = Vector3.up;
@@ -45,12 +45,12 @@ public class BallScript : MonoBehaviour
 
     public void Launch()
     {
-        if (!GameManager.Instance.ballLaunched)
+        if (!Level1Manager.Instance.ballLaunched)
         {
             Debug.Log("Launch!");
             currentSpeed = initialSpeed;
             direction = transform.up;
-            GameManager.Instance.ballLaunched = true;
+            Level1Manager.Instance.ballLaunched = true;
         }
     }
 
@@ -76,7 +76,7 @@ public class BallScript : MonoBehaviour
         // yield return new WaitforSeconds(0.5);
         yield return new WaitUntil( () => oldCount != FindObjectsOfType<BrickScript>().Length);
         Debug.Log("Remaining bricks: "+FindObjectsOfType<BrickScript>().Length);
-        GameManager.Instance.CheckWin();
+        Level1Manager.Instance.CheckWin();
     }
 
 
@@ -85,7 +85,7 @@ public class BallScript : MonoBehaviour
         if(transform.position.y < bottomBoundary)
         {
             Destroy(gameObject);
-            GameManager.Instance.GameOver();
+            Level1Manager.Instance.GameOver();
         }
     }
 
