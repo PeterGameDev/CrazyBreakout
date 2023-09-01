@@ -19,6 +19,19 @@ public class Level1Manager : MonoBehaviour
         ballLaunched = false;
     }
 
+    private void Update()
+    {
+        // simple time manipulation test
+        if (ballLaunched && Input.GetButton("Jump"))
+        {
+            Time.timeScale = 2.0f;
+        }
+        if (ballLaunched && Input.GetButtonUp("Jump"))
+        {
+            Time.timeScale = 1.0f;
+        }
+    }
+
 
     public void GameOver()
     {
