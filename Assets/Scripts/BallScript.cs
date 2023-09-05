@@ -14,7 +14,7 @@ public class BallScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        direction = transform.up;
+        direction = (Vector3.down + Vector3.right) / 2;
     }
 
     // Update is called once per frame
@@ -49,7 +49,6 @@ public class BallScript : MonoBehaviour
         {
             Debug.Log("Launch!");
             currentSpeed = initialSpeed;
-            direction = transform.up;
             Level1Manager.Instance.ballLaunched = true;
         }
     }

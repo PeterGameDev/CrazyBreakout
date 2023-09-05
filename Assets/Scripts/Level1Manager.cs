@@ -8,6 +8,13 @@ public class Level1Manager : MonoBehaviour
     public bool ballLaunched;
     public GameObject gameOverMenu;
     public GameObject gameWonMenu;
+    public GameObject pauseMenu;
+    public bool paused = false;
+
+    private void Awake()
+    {
+        Time.timeScale = 1.0f;
+    }
     void Start()
     {
         if (Instance != null)
@@ -22,13 +29,19 @@ public class Level1Manager : MonoBehaviour
     private void Update()
     {
         // simple time manipulation test
-        if (ballLaunched && Input.GetButton("Jump"))
+        if (ballLaunched && Input.GetButton("Jump") && !paused)
         {
             Time.timeScale = 2.0f;
         }
-        if (ballLaunched && Input.GetButtonUp("Jump"))
+        if (ballLaunched && Input.GetButtonUp("Jump") && !paused)
         {
             Time.timeScale = 1.0f;
+        }
+        if (Input.GetButtonDown("Cancel") && !paused)
+        {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0f;
+            paused = true;
         }
     }
 
@@ -38,6 +51,8 @@ public class Level1Manager : MonoBehaviour
         Debug.Log("Game Over!");
         // Show gameover menu
         gameOverMenu.SetActive(true);
+        Time.timeScale = 0f;
+        paused = true;
         // Stop game afterward.
     }
 
@@ -53,6 +68,8 @@ public class Level1Manager : MonoBehaviour
     public void GameWon()
     {
         Debug.Log("Game Won!");
+        Time.timeScale = 0f;
+        paused = true;
         gameWonMenu.SetActive(true);
         // Stop game afterward.
     }
