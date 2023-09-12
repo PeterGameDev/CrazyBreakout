@@ -66,8 +66,9 @@ public class BallScript : MonoBehaviour
     IEnumerator HitBrick(GameObject brick)
     {
         int oldCount = FindObjectsOfType<BrickScript>().Length;
+        brick.SetActive(false);
+        yield return new WaitForSeconds(1);
         Destroy(brick);
-
 
         // wait a bit for destroy to finish before check for win
         // can change to wait for seconds for better performance
@@ -77,7 +78,6 @@ public class BallScript : MonoBehaviour
         Debug.Log("Remaining bricks: "+FindObjectsOfType<BrickScript>().Length);
         Level1Manager.Instance.CheckWin();
     }
-
 
     private void CheckBoundary()
     {
