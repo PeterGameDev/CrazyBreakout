@@ -53,6 +53,7 @@ public class Level1Manager : MonoBehaviour
         gameOverMenu.SetActive(true);
         Time.timeScale = 0f;
         paused = true;
+        SFXScript.Instance.playGameOverSound();
         // Stop game afterward.
     }
 
@@ -71,6 +72,7 @@ public class Level1Manager : MonoBehaviour
         Time.timeScale = 0f;
         paused = true;
         gameWonMenu.SetActive(true);
+        SFXScript.Instance.playVictorySound();
         // Stop game afterward.
     }
 }

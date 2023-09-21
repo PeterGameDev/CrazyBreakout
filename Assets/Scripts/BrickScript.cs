@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class BrickScript : MonoBehaviour
 {
-    public ParticleSystem brickBreakParticleSystem;
-
-    private void OnDisable()
+    // Start is called before the first frame update
+    void Start()
     {
-
-        Debug.Log("Brick break particle system");
-        ParticleSystem ps = Instantiate(brickBreakParticleSystem);
-        ps.transform.position = transform.position;
-        ps.Play();
+        
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 }

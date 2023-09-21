@@ -11,6 +11,7 @@ public class BallScript : MonoBehaviour
     private Vector3 direction;
     public GameObject paddle;
     public float bottomBoundary = -33f;
+    public ParticleSystem brickBreakParticleSystem;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +58,7 @@ public class BallScript : MonoBehaviour
     {
         Vector3 normal = collision.GetContact(0).normal;
         direction -= 2 * Vector3.Dot(direction, normal) * normal;
+        SFXScript.Instance.playBallBounceSound(); 
         if (collision.gameObject.CompareTag("Brick"))
         {
             StartCoroutine(HitBrick(collision.gameObject));
@@ -66,10 +68,11 @@ public class BallScript : MonoBehaviour
     IEnumerator HitBrick(GameObject brick)
     {
         int oldCount = FindObjectsOfType<BrickScript>().Length;
-        brick.SetActive(false);
-        yield return new WaitForSeconds(1);
+        ParticleSystem ps = Instantiate(brickBreakParticleSystem);
+        ps.transform.position = brick.transform.position;
+        ps.Play();
         Destroy(brick);
-
+        SFXScript.Instance.playBrickBreakSound();
         // wait a bit for destroy to finish before check for win
         // can change to wait for seconds for better performance
 

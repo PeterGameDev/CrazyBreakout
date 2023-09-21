@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5823305695488207635}
   - component: {fileID: 5250944400855144195}
   - component: {fileID: 6368148009340351173}
-  - component: {fileID: 8649095534288533653}
+  - component: {fileID: -1360343482861596802}
   m_Layer: 0
   m_Name: Brick
   m_TagString: Brick
@@ -106,7 +106,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8649095534288533653
+--- !u!114 &-1360343482861596802
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,4 +118,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc1b9ce9d4187c941b2ba8b27869cef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brickBreakParticleSystem: {fileID: 4716595487544875942, guid: 7a085df45abb1fb4ebb9762aa8ea4f33, type: 3}
