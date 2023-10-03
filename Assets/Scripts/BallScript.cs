@@ -54,8 +54,10 @@ public class BallScript : MonoBehaviour
         }
     }
 
+    // Calculate the bounce back when ball hit objects
     private void OnCollisionEnter(Collision collision)
     {
+
         Vector3 normal = collision.GetContact(0).normal;
         direction -= 2 * Vector3.Dot(direction, normal) * normal;
         SFXScript.Instance.playBallBounceSound(); 
@@ -63,6 +65,17 @@ public class BallScript : MonoBehaviour
         {
             StartCoroutine(HitBrick(collision.gameObject));
         }
+        // Game over if hit bottom death plane
+        if (collision.gameObject.CompareTag("DeathPlane"))
+        {
+            Destroy(gameObject);
+            Level1Manager.Instance.GameOver();
+        }
+        if (!collision.gameObject.CompareTag("Paddle"))
+        {
+            PathCalculation();
+        }
+
     }
 
     IEnumerator HitBrick(GameObject brick)
@@ -88,6 +101,27 @@ public class BallScript : MonoBehaviour
         {
             Destroy(gameObject);
             Level1Manager.Instance.GameOver();
+        }
+    }
+
+    // Calculate the path of the ball
+    private void PathCalculation()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, direction, out hit)) 
+        {
+            Debug.Log("Path gonna hit "+hit.point);
+            if(hit.point.y < -10) 
+            {
+                Time.timeScale = 1.0f;
+                Debug.Log("Slow down");
+            }
+            else
+            {
+                if(Time.timeScale < 4.0f)
+                Time.timeScale += 1.0f;
+                Debug.Log("Speed up");
+            }
         }
     }
 

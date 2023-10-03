@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 public class Level1Manager : MonoBehaviour
@@ -10,6 +11,7 @@ public class Level1Manager : MonoBehaviour
     public GameObject gameWonMenu;
     public GameObject pauseMenu;
     public bool paused = false;
+    public int nextSceneNumber;
 
     private void Awake()
     {

@@ -137,11 +137,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 744492056015676335, guid: 74efe04a66cf4bf468a95c5c619a4765, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.464407
+      value: 6.07
       objectReference: {fileID: 0}
     - target: {fileID: 744492056015676335, guid: 74efe04a66cf4bf468a95c5c619a4765, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.013617
+      value: 8.98
       objectReference: {fileID: 0}
     - target: {fileID: 744492056015676335, guid: 74efe04a66cf4bf468a95c5c619a4765, type: 3}
       propertyPath: m_LocalPosition.z
@@ -206,7 +206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 744492056015676335, guid: 74efe04a66cf4bf468a95c5c619a4765, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.263617
+      value: 19.23
       objectReference: {fileID: 0}
     - target: {fileID: 744492056015676335, guid: 74efe04a66cf4bf468a95c5c619a4765, type: 3}
       propertyPath: m_LocalPosition.z
@@ -513,7 +513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 744492056015676335, guid: 74efe04a66cf4bf468a95c5c619a4765, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.325593
+      value: -13.58
       objectReference: {fileID: 0}
     - target: {fileID: 744492056015676335, guid: 74efe04a66cf4bf468a95c5c619a4765, type: 3}
       propertyPath: m_LocalPosition.y
@@ -717,7 +717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 744492056015676335, guid: 74efe04a66cf4bf468a95c5c619a4765, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.1855928
+      value: -2.49
       objectReference: {fileID: 0}
     - target: {fileID: 744492056015676335, guid: 74efe04a66cf4bf468a95c5c619a4765, type: 3}
       propertyPath: m_LocalPosition.y
@@ -802,7 +802,7 @@ MonoBehaviour:
   gameWonMenu: {fileID: 1802918101}
   pauseMenu: {fileID: 905935777}
   paused: 0
-  nextSceneNumber: 2
+  nextSceneNumber: 1
 --- !u!4 &258429059
 Transform:
   m_ObjectHideFlags: 0
@@ -981,11 +981,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 744492056015676335, guid: 74efe04a66cf4bf468a95c5c619a4765, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.025593
+      value: -12.11
       objectReference: {fileID: 0}
     - target: {fileID: 744492056015676335, guid: 74efe04a66cf4bf468a95c5c619a4765, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.253616
+      value: 10.69
       objectReference: {fileID: 0}
     - target: {fileID: 744492056015676335, guid: 74efe04a66cf4bf468a95c5c619a4765, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2133,7 +2133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 744492056015676335, guid: 74efe04a66cf4bf468a95c5c619a4765, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.403617
+      value: 18.94
       objectReference: {fileID: 0}
     - target: {fileID: 744492056015676335, guid: 74efe04a66cf4bf468a95c5c619a4765, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2337,7 +2337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 744492056015676335, guid: 74efe04a66cf4bf468a95c5c619a4765, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.093617
+      value: 9.75
       objectReference: {fileID: 0}
     - target: {fileID: 744492056015676335, guid: 74efe04a66cf4bf468a95c5c619a4765, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2577,7 +2577,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Next Level
+  m_text: Play Again
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
   m_sharedMaterial: {fileID: 2140032, guid: dc36b3fdc14f47ebb36fd484a67e268a, type: 2}
@@ -2938,7 +2938,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 744492056015676335, guid: 74efe04a66cf4bf468a95c5c619a4765, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.6055927
+      value: 8.07
       objectReference: {fileID: 0}
     - target: {fileID: 744492056015676335, guid: 74efe04a66cf4bf468a95c5c619a4765, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3002,7 +3002,7 @@ GameObject:
   - component: {fileID: 1492587250}
   - component: {fileID: 1492587249}
   m_Layer: 5
-  m_Name: NextLevelButton
+  m_Name: PlayAgainButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
