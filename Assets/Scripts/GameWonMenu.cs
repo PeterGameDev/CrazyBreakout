@@ -11,6 +11,7 @@ public class GameWonMenu : MonoBehaviour
     }
     public void NextScene()
     {
-        SceneManager.LoadScene(Level1Manager.Instance.nextSceneNumber);
+        GameManager.Instance.currentLevel += 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

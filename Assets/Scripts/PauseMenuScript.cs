@@ -13,9 +13,9 @@ public class PauseMenuScript : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            gameObject.SetActive(false );
+            gameObject.SetActive(false);
             Time.timeScale = 1.0f;
-            Level1Manager.Instance.paused = false;
+            GameManager.Instance.paused = false;
         }
     }
 }

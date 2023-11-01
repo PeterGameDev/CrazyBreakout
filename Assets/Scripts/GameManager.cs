@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public bool ballLaunched;
+    public int currentLevel;
+    public bool paused = false;
 
     void Awake()
     {
@@ -22,27 +24,5 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         ballLaunched = false;
-    }
-
-
-    public void GameOver()
-    {
-        Debug.Log("Game Over!");
-        // Show gameover menu
-        FindObjectOfType<GameOverMenuScript>().gameObject.transform.GetChild(0).gameObject.SetActive(true);
-    }
-
-    public void CheckWin()
-    {
-        int brickCount = FindObjectsOfType<BrickScript>().Length;
-        if (brickCount == 0)
-        {
-            GameWon();
-        }
-    }
-
-    public void GameWon()
-    {
-        Debug.Log("Game Won!");
     }
 }

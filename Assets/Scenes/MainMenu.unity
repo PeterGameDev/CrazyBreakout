@@ -1162,6 +1162,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ballLaunched: 0
+  currentLevel: 1
+  paused: 0
+  gameOverMenu: {fileID: 0}
+  gameWonMenu: {fileID: 0}
+  pauseMenu: {fileID: 0}
 --- !u!4 &1222256392
 Transform:
   m_ObjectHideFlags: 0

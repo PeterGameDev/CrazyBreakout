@@ -11,11 +11,20 @@ public class GameOverMenuScript : MonoBehaviour
     }
     public void RetartButtonClicked()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void MenuButtonClicked()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void setActive()
+    {
+        gameObject.SetActive(true);
+    }
+    public void Deactive()
+    {
+        gameObject.SetActive(false);
     }
 }

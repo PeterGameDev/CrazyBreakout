@@ -12,6 +12,7 @@ public class BallScript : MonoBehaviour
     public GameObject paddle;
     public float bottomBoundary = -33f;
     public ParticleSystem brickBreakParticleSystem;
+    public Level1Manager level1Manager;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +29,7 @@ public class BallScript : MonoBehaviour
         }
 
         // the ball stays with the paddle if it's on the paddle
-        if (!Level1Manager.Instance.ballLaunched)
+        if (!GameManager.Instance.ballLaunched)
         {
             Vector3 newPosition = transform.position;
             Vector3 offset = Vector3.up;
@@ -46,11 +47,11 @@ public class BallScript : MonoBehaviour
 
     public void Launch()
     {
-        if (!Level1Manager.Instance.ballLaunched)
+        if (!GameManager.Instance.ballLaunched)
         {
             Debug.Log("Launch!");
             currentSpeed = initialSpeed;
-            Level1Manager.Instance.ballLaunched = true;
+            GameManager.Instance.ballLaunched = true;
         }
     }
 
@@ -69,7 +70,7 @@ public class BallScript : MonoBehaviour
         if (collision.gameObject.CompareTag("DeathPlane"))
         {
             Destroy(gameObject);
-            Level1Manager.Instance.GameOver();
+            level1Manager.GameOver();
         }
         if (!collision.gameObject.CompareTag("Paddle"))
         {
@@ -92,7 +93,7 @@ public class BallScript : MonoBehaviour
         // yield return new WaitforSeconds(0.5);
         yield return new WaitUntil( () => oldCount != FindObjectsOfType<BrickScript>().Length);
         Debug.Log("Remaining bricks: "+FindObjectsOfType<BrickScript>().Length);
-        Level1Manager.Instance.CheckWin();
+        level1Manager.CheckWin();
     }
 
     private void CheckBoundary()
@@ -100,7 +101,7 @@ public class BallScript : MonoBehaviour
         if(transform.position.y < bottomBoundary)
         {
             Destroy(gameObject);
-            Level1Manager.Instance.GameOver();
+            level1Manager.GameOver();
         }
     }
 
