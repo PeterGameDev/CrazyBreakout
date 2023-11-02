@@ -30,7 +30,30 @@ public class BallScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {        
+    {
+        if (transform.position.y >= 29.5 && direction.y > 0)
+        {
+            Vector3 normal = new Vector3(0, -1, 0);
+            direction = CalculateBounceBack(direction, normal);
+            SFXScript.Instance.playBallBounceSound();
+            PathCalculation();
+        }
+        if ((transform.position.x <= -18.5 && direction.x < 0) || (transform.position.x >= 18.5 && direction.x > 0))
+        {
+            Vector3 normal = new Vector3(0, 0, 0);
+            if(direction.x < 0)
+            {
+                normal = new Vector3(1, 0, 0);
+                SFXScript.Instance.playBallBounceSound();
+            }
+            if(direction.x > 0)
+            {
+                normal = new Vector3(-1, 0, 0);
+                SFXScript.Instance.playBallBounceSound();
+            }
+            direction = CalculateBounceBack(direction, normal);
+            PathCalculation();
+        }
         // launch the ball on player input
         if (Input.GetButtonDown("Jump"))
         {
@@ -70,23 +93,25 @@ public class BallScript : MonoBehaviour
         SFXScript.Instance.playBallBounceSound();
 
         Vector3 normal = collision.GetContact(0).normal;
+        //direction = calculateBounceBack(direction, normal);
         // add a slight angle if direction is too horizontal
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            var angle = Vector3.Angle(direction, normal);
-            if (angle > adjustAngle)
-            {
-                // make ball go upward if totally horizontal
-                if(angle == 180)
-                {
-                    direction += new Vector3(0, 0.1f, 0);
-                }
-                // add adjustAngle angle
-                direction = Vector3.RotateTowards(direction, normal, Mathf.Deg2Rad*15f, Mathf.Infinity); 
-            }
-            Debug.Log("Direction: " + direction);
-            Debug.Log("Angle between: " + angle);
-        }
+        //if (collision.gameObject.CompareTag("Wall"))
+        //{
+        //    calculateBounceBack(direction, normal);
+        //    var angle = Vector3.Angle(direction, normal);
+        //    if (angle > adjustAngle)
+        //    {
+        //        // make ball go upward if totally horizontal
+        //        if(angle == 180)
+        //        {
+        //            direction += new Vector3(0, 0.1f, 0);
+        //        }
+        //        // add adjustAngle angle
+        //        direction = Vector3.RotateTowards(direction, normal, Mathf.Deg2Rad*15f, Mathf.Infinity); 
+        //    }
+        //    Debug.Log("Direction: " + direction);
+        //    Debug.Log("Angle between: " + angle);
+        //}
 
         direction -= 2 * Vector3.Dot(direction, normal) * normal;
         if (collision.gameObject.CompareTag("Brick"))
@@ -106,6 +131,24 @@ public class BallScript : MonoBehaviour
 
     }
 
+    private Vector3 CalculateBounceBack(Vector3 direction, Vector3 normal)
+    {
+        var angle = Vector3.Angle(direction, normal);
+        if (angle > adjustAngle)
+        {
+            // make ball go upward if totally horizontal
+            if (angle == 180)
+            {
+                direction += new Vector3(0, 0.1f, 0);
+            }
+            // add adjustAngle angle
+            direction = Vector3.RotateTowards(direction, normal, Mathf.Deg2Rad * 15f, Mathf.Infinity);
+        }
+        direction -= 2 * Vector3.Dot(direction, normal) * normal;
+        PathCalculation();
+        return direction;
+    }
+
     IEnumerator HitBrick(GameObject brick)
     {
         int oldCount = FindObjectsOfType<BrickScript>().Length;
@@ -119,7 +162,7 @@ public class BallScript : MonoBehaviour
 
         // yield return new WaitforSeconds(0.5);
         yield return new WaitUntil( () => oldCount != FindObjectsOfType<BrickScript>().Length);
-        Debug.Log("Remaining bricks: "+FindObjectsOfType<BrickScript>().Length);
+        //Debug.Log("Remaining bricks: "+FindObjectsOfType<BrickScript>().Length);
         level1Manager.CheckWin();
     }
 
@@ -142,13 +185,15 @@ public class BallScript : MonoBehaviour
             if(hit.point.y < -10) 
             {
                 currentSpeed = initialSpeed;
-                //Debug.Log("Slow down");
+                Debug.Log("Slow down");
             }
             else
             {
                 if (currentSpeed < maxSpeed)
+                {
                     currentSpeed += speedInterval;
-                //Debug.Log("Speed up");
+                    Debug.Log("Speed up");
+                }
             }
         }
     }
