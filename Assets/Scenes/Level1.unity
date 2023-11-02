@@ -1165,8 +1165,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.0394812, y: 3.5704536, z: 1}
+  m_Center: {x: 0.0020309596, y: 1.2852268, z: 0}
 --- !u!23 &813038792
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3365,8 +3365,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 4.6073895, y: 1.0230478, z: 1}
+  m_Center: {x: 1.8036947, y: -0.0043130075, z: 0}
 --- !u!23 &1959922536
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3470,8 +3470,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 4.808008, y: 1.0298878, z: 1}
+  m_Center: {x: -1.9040041, y: -0.0032998975, z: 0}
 --- !u!23 &1972313738
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3544,12 +3544,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3832814851558448388, guid: 1cfb2d0c0a9d1674583d55e532e4c2f8, type: 3}
       propertyPath: m_CollisionDetection
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -1460046909694647371, guid: 1cfb2d0c0a9d1674583d55e532e4c2f8, type: 3}
       propertyPath: paddle
       value: 
       objectReference: {fileID: 1663441423}
+    - target: {fileID: -1460046909694647371, guid: 1cfb2d0c0a9d1674583d55e532e4c2f8, type: 3}
+      propertyPath: maxSpeed
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: -1460046909694647371, guid: 1cfb2d0c0a9d1674583d55e532e4c2f8, type: 3}
+      propertyPath: adjustAngle
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: -1460046909694647371, guid: 1cfb2d0c0a9d1674583d55e532e4c2f8, type: 3}
       propertyPath: initialSpeed
       value: 30
@@ -3848,6 +3856,14 @@ PrefabInstance:
     - target: {fileID: 1622808059424317335, guid: b5abd479054060e49914182002d8eeb8, type: 3}
       propertyPath: rotateSpeed
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 2207215897237549058, guid: b5abd479054060e49914182002d8eeb8, type: 3}
+      propertyPath: m_Size.y
+      value: 2.4099197
+      objectReference: {fileID: 0}
+    - target: {fileID: 2207215897237549058, guid: b5abd479054060e49914182002d8eeb8, type: 3}
+      propertyPath: m_Center.y
+      value: -0.63905334
       objectReference: {fileID: 0}
     - target: {fileID: 3402417141204244578, guid: b5abd479054060e49914182002d8eeb8, type: 3}
       propertyPath: m_Name

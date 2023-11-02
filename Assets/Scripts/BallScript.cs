@@ -7,7 +7,12 @@ public class BallScript : MonoBehaviour
 {
     [SerializeField]
     private float initialSpeed = 10f;
-    private float currentSpeed = 0f;
+    public float currentSpeed = 0f;
+    public float speedInterval = 10f;
+    [SerializeField]
+    private float maxSpeed = 40f;
+    [SerializeField]
+    private float adjustAngle = 150f;
     private Vector3 direction;
     public GameObject paddle;
     public float bottomBoundary = -33f;
@@ -16,7 +21,11 @@ public class BallScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        direction = (Vector3.down + Vector3.right) / 2;
+        //direction = (Vector3.down + Vector3.right) / 2;
+
+        // test horizontal adjustment
+        //direction = (Vector3.right + new Vector3(0, -0.1f, 0)).normalized;
+        direction = Vector3.right;
     }
 
     // Update is called once per frame
@@ -58,10 +67,28 @@ public class BallScript : MonoBehaviour
     // Calculate the bounce back when ball hit objects
     private void OnCollisionEnter(Collision collision)
     {
+        SFXScript.Instance.playBallBounceSound();
 
         Vector3 normal = collision.GetContact(0).normal;
+        // add a slight angle if direction is too horizontal
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            var angle = Vector3.Angle(direction, normal);
+            if (angle > adjustAngle)
+            {
+                // make ball go upward if totally horizontal
+                if(angle == 180)
+                {
+                    direction += new Vector3(0, 0.1f, 0);
+                }
+                // add adjustAngle angle
+                direction = Vector3.RotateTowards(direction, normal, Mathf.Deg2Rad*15f, Mathf.Infinity); 
+            }
+            Debug.Log("Direction: " + direction);
+            Debug.Log("Angle between: " + angle);
+        }
+
         direction -= 2 * Vector3.Dot(direction, normal) * normal;
-        SFXScript.Instance.playBallBounceSound(); 
         if (collision.gameObject.CompareTag("Brick"))
         {
             StartCoroutine(HitBrick(collision.gameObject));
@@ -111,17 +138,17 @@ public class BallScript : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, direction, out hit)) 
         {
-            Debug.Log("Path gonna hit "+hit.point);
+            //Debug.Log("Path gonna hit "+hit.point);
             if(hit.point.y < -10) 
             {
-                Time.timeScale = 1.0f;
-                Debug.Log("Slow down");
+                currentSpeed = initialSpeed;
+                //Debug.Log("Slow down");
             }
             else
             {
-                if(Time.timeScale < 4.0f)
-                Time.timeScale += 1.0f;
-                Debug.Log("Speed up");
+                if (currentSpeed < maxSpeed)
+                    currentSpeed += speedInterval;
+                //Debug.Log("Speed up");
             }
         }
     }
