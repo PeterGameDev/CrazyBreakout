@@ -52,7 +52,7 @@ public class Level1Manager : MonoBehaviour
         {
             string jsonString = File.ReadAllText(path);
             spawnList = JsonUtility.FromJson<MyDataType.SpawnList>(jsonString);
-            Debug.Log(jsonString);
+            //Debug.Log(jsonString);
         }
         else
         {

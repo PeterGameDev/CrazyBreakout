@@ -528,7 +528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objects:
-  - {fileID: 5350517503309976391, guid: 19c5cb2594757e249890999b6680fbc8, type: 3}
+  - {fileID: 7060522131009619594, guid: 74efe04a66cf4bf468a95c5c619a4765, type: 3}
   gameOverMenu: {fileID: 945567520}
   gameWonMenu: {fileID: 1802918101}
   pauseMenu: {fileID: 905935777}
@@ -3645,7 +3645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3832814851558448388, guid: 1cfb2d0c0a9d1674583d55e532e4c2f8, type: 3}
       propertyPath: m_Constraints
-      value: 8
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: -3832814851558448388, guid: 1cfb2d0c0a9d1674583d55e532e4c2f8, type: 3}
       propertyPath: m_IsKinematic

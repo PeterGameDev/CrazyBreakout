@@ -21,11 +21,11 @@ public class BallScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //direction = (Vector3.down + Vector3.right) / 2;
+        direction = (Vector3.down + Vector3.right) / 2;
 
         // test horizontal adjustment
         //direction = (Vector3.right + new Vector3(0, -0.1f, 0)).normalized;
-        direction = Vector3.right;
+        //direction = Vector3.right;
     }
 
     // Update is called once per frame
@@ -93,25 +93,6 @@ public class BallScript : MonoBehaviour
         SFXScript.Instance.playBallBounceSound();
 
         Vector3 normal = collision.GetContact(0).normal;
-        //direction = calculateBounceBack(direction, normal);
-        // add a slight angle if direction is too horizontal
-        //if (collision.gameObject.CompareTag("Wall"))
-        //{
-        //    calculateBounceBack(direction, normal);
-        //    var angle = Vector3.Angle(direction, normal);
-        //    if (angle > adjustAngle)
-        //    {
-        //        // make ball go upward if totally horizontal
-        //        if(angle == 180)
-        //        {
-        //            direction += new Vector3(0, 0.1f, 0);
-        //        }
-        //        // add adjustAngle angle
-        //        direction = Vector3.RotateTowards(direction, normal, Mathf.Deg2Rad*15f, Mathf.Infinity); 
-        //    }
-        //    Debug.Log("Direction: " + direction);
-        //    Debug.Log("Angle between: " + angle);
-        //}
 
         direction -= 2 * Vector3.Dot(direction, normal) * normal;
         if (collision.gameObject.CompareTag("Brick"))
@@ -142,7 +123,7 @@ public class BallScript : MonoBehaviour
                 direction += new Vector3(0, 0.1f, 0);
             }
             // add adjustAngle angle
-            direction = Vector3.RotateTowards(direction, normal, Mathf.Deg2Rad * 15f, Mathf.Infinity);
+            direction = Vector3.RotateTowards(direction, normal, Mathf.Deg2Rad * 5f, Mathf.Infinity);
         }
         direction -= 2 * Vector3.Dot(direction, normal) * normal;
         PathCalculation();
@@ -151,18 +132,9 @@ public class BallScript : MonoBehaviour
 
     IEnumerator HitBrick(GameObject brick)
     {
-        int oldCount = FindObjectsOfType<BrickScript>().Length;
-        ParticleSystem ps = Instantiate(brickBreakParticleSystem);
-        ps.transform.position = brick.transform.position;
-        ps.Play();
-        Destroy(brick);
-        SFXScript.Instance.playBrickBreakSound();
-        // wait a bit for destroy to finish before check for win
-        // can change to wait for seconds for better performance
 
-        // yield return new WaitforSeconds(0.5);
-        yield return new WaitUntil( () => oldCount != FindObjectsOfType<BrickScript>().Length);
-        //Debug.Log("Remaining bricks: "+FindObjectsOfType<BrickScript>().Length);
+        brick.GetComponent<BrickScript>().Destroy();
+        yield return null;
         level1Manager.CheckWin();
     }
 
@@ -185,14 +157,14 @@ public class BallScript : MonoBehaviour
             if(hit.point.y < -10) 
             {
                 currentSpeed = initialSpeed;
-                Debug.Log("Slow down");
+                //Debug.Log("Slow down");
             }
             else
             {
                 if (currentSpeed < maxSpeed)
                 {
                     currentSpeed += speedInterval;
-                    Debug.Log("Speed up");
+                    //Debug.Log("Speed up");
                 }
             }
         }
